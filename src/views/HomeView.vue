@@ -7,6 +7,7 @@
     </p>
 
     <TSXDemo />
+    <LoginButton />
   </div>
 </template>
 

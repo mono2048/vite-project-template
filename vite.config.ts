@@ -1,5 +1,6 @@
 import { resolve } from "path";
-import { defineConfig } from "vite";
+import { UserConfigExport, ConfigEnv } from "vite";
+import { viteMockServe } from "vite-plugin-mock";
 import vue from "@vitejs/plugin-vue";
 import VueJsx from "@vitejs/plugin-vue-jsx";
 import AutoImports from "unplugin-auto-import/vite";
@@ -7,7 +8,7 @@ import { dirResolver, DirResolverHelper } from "vite-auto-import-resolvers";
 import Components from "unplugin-vue-components/vite";
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default ({ command }: ConfigEnv): UserConfigExport => ({
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -17,6 +18,11 @@ export default defineConfig({
   plugins: [
     vue(),
     VueJsx(),
+    viteMockServe({
+      mockPath: "src/mock",
+      localEnabled: command === "serve",
+      prodEnabled: command === "build",
+    }),
     DirResolverHelper(),
     AutoImports({
       imports: ["vue", "vue-router", "pinia", "@vueuse/core"],
@@ -24,10 +30,10 @@ export default defineConfig({
       dts: "src/auto-import.d.ts",
     }),
     Components({
-      dirs: ["src/components"],
+      dirs: ["src/components", "src/api"],
       // ui库解析器
       // resolvers: [ElementPlusResolver()],
-      extensions: ["vue", "tsx"],
+      extensions: ["vue", "tsx", "ts"],
       dts: "src/components.d.ts",
     }),
   ],
