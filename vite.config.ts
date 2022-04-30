@@ -6,6 +6,7 @@ import VueJsx from "@vitejs/plugin-vue-jsx";
 import AutoImports from "unplugin-auto-import/vite";
 import { dirResolver, DirResolverHelper } from "vite-auto-import-resolvers";
 import Components from "unplugin-vue-components/vite";
+import Inspect from "vite-plugin-inspect";
 
 // https://vitejs.dev/config/
 export default ({ command }: ConfigEnv): UserConfigExport => ({
@@ -18,6 +19,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => ({
   plugins: [
     vue(),
     VueJsx(),
+    Inspect(),
     viteMockServe({
       mockPath: "src/mock",
       localEnabled: command === "serve",

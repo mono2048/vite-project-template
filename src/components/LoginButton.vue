@@ -8,22 +8,19 @@
 <script setup lang="ts">
 import { testRequest } from '@/api/test';
 
-const { data, run } = testRequest();
+const { data, loading, run } = testRequest();
 const user = {
-  name: computed(() => data.value?.data.name || '')
+  name: computed(() => data.value?.data.name)
 };
 
 const state = reactive({
-  isLogin: false,
+  isLogin: computed(() => !loading.value && user.name.value),
   text: '未登录'
 });
 
 const login = async () => {
   state.text = '登录中';
-  await run().then((res) => {
-    console.log(res);
-  });
-  state.isLogin = true;
+  run();
 };
 </script>
 

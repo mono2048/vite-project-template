@@ -9,7 +9,8 @@ export const testRequest = () => {
       method: 'post'
     },
     {
-      manual: false
+      manual: true,
+      debounceInterval: 500
     }
   );
 
