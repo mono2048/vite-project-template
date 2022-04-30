@@ -5,6 +5,8 @@
     <p v-for="(row, idx) in poem.content" :key="idx">
       {{ row }}
     </p>
+
+    <TSXDemo />
   </div>
 </template>
 

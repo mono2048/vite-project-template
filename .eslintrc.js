@@ -18,4 +18,12 @@ module.exports = {
   },
   plugins: ["vue", "@typescript-eslint"],
   rules: {},
+  overrides: [
+    {
+      files: ["*.d.ts"],
+      rules: {
+        "no-unused-vars": 0,
+      },
+    },
+  ],
 };
