@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>npm init @eslint/config</div>
+    <div>Home</div>
   </div>
 </template>
 
