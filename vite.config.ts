@@ -1,6 +1,9 @@
 import { resolve } from "path";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import AutoImports from "unplugin-auto-import/vite";
+import { dirResolver, DirResolverHelper } from "vite-auto-import-resolvers";
+import Components from "unplugin-vue-components/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,5 +13,20 @@ export default defineConfig({
     },
   },
   server: { host: true },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    DirResolverHelper(),
+    AutoImports({
+      imports: ["vue", "vue-router", "pinia", "@vueuse/core"],
+      resolvers: [dirResolver({ srcAlias: "@" })],
+      dts: "src/auto-import.d.ts",
+    }),
+    Components({
+      dirs: ["src/components"],
+      // ui库解析器
+      // resolvers: [ElementPlusResolver()],
+      extensions: ["vue"],
+      dts: "src/components.d.ts",
+    }),
+  ],
 });

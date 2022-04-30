@@ -9,6 +9,7 @@ module.exports = {
     "plugin:vue/vue3-essential",
     "standard",
     "plugin:prettier/recommended",
+    "vue-global-api",
   ],
   parserOptions: {
     ecmaVersion: "latest",
