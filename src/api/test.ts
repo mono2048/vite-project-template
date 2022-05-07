@@ -1,11 +1,13 @@
 import { useRequest } from 'vue-request';
+import type { RequestResult } from 'vue-request/dist/types/useRequest';
+import { R, BASE_API } from './base';
 
-type R = { code: number; data: { name: string } };
+type Data = { name: string };
 
-export const testRequest = () => {
-  const { data, loading, error, run } = useRequest<R, unknown[]>(
+export const testRequest = (): RequestResult<R<Data>, unknown[]> => {
+  return useRequest<any, unknown[]>(
     {
-      url: '/api/post',
+      url: BASE_API + '/api/post',
       method: 'post'
     },
     {
@@ -13,6 +15,4 @@ export const testRequest = () => {
       debounceInterval: 500
     }
   );
-
-  return { data, loading, error, run };
 };
