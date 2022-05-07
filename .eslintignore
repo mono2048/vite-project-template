@@ -11,3 +11,4 @@ dist
 mock
 public
 *.d.ts
+*.config.ts
