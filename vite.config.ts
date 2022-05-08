@@ -23,7 +23,7 @@ export default ({ command }: ConfigEnv): UserConfigExport => ({
     viteMockServe({
       mockPath: "src/mock",
       localEnabled: command === "serve",
-      prodEnabled: command === "build",
+      prodEnabled: true,
     }),
     DirResolverHelper(),
     AutoImports({
